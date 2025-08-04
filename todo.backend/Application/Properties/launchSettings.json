@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "Application": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_VERSION": "Development",
+        "TodoDBConnectionString": ""
+      }
+    }
+  }
+}
