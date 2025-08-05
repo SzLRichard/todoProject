@@ -33,14 +33,33 @@ namespace Application.Services
             
         }
 
+        public async Task<GetTodoItemDTO> CreateAsync(CreateTodoItemDTO dto)
+        {
+            await _createValidator.ValidateAndThrowAsync(dto);
+            var newItem = _mapper.Map<TodoItem>(dto);
+            var createdTodo = await _repository.CreateAsync(newItem);
+            return _mapper.Map<GetTodoItemDTO>(createdTodo);
+        }
+
         public bool Delete(Guid id)
         {
             return _repository.Delete(id);
         }
 
+        public async Task<bool> DeleteAsync(Guid id)
+        {
+            return await _repository.DeleteAsync(id);
+        }
+
         public IEnumerable<GetTodoItemDTO> GetAll()
         {
             var todos = _repository.GetAll();
+            return _mapper.Map<IEnumerable<GetTodoItemDTO>>(todos);
+        }
+
+        public async Task<IEnumerable<GetTodoItemDTO>> GetAllAsync()
+        {
+            var todos = await _repository.GetAllAsync();
             return _mapper.Map<IEnumerable<GetTodoItemDTO>>(todos);
         }
 
@@ -53,12 +72,30 @@ namespace Application.Services
             return _mapper.Map<GetTodoItemDTO>(todoItem);
         }
 
+        public async Task<GetTodoItemDTO?> GetByIdAsync(Guid id)
+        {
+            var todoItem = await _repository.getByIdAsync(id);
+            if (todoItem == null)
+            {
+                return null;
+            }
+            return _mapper.Map<GetTodoItemDTO>(todoItem);
+        }
+
         public bool Update(Guid id, UpdateTodoItemDTO dto)
         {
             _updateValidator.ValidateAndThrow(dto);
             var newTodoItem = _mapper.Map<TodoItem>(dto);
             newTodoItem.Id=id;
             return _repository.Update(newTodoItem);
+        }
+
+        public async Task<bool> UpdateAsync(Guid id, UpdateTodoItemDTO dto)
+        {
+            await _updateValidator.ValidateAndThrowAsync(dto);
+            var newTodoItem = _mapper.Map<TodoItem>(dto);
+            newTodoItem.Id = id;
+            return await _repository.UpdateAsync(newTodoItem);
         }
     }
 }

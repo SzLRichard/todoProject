@@ -1,9 +1,11 @@
-﻿using todo.core.Models.Enums;
+﻿using System.ComponentModel.DataAnnotations;
+using todo.core.Models.Enums;
 
 namespace todo.core.Models
 {
     public class TodoItem
     {
+        [Key]
         public Guid Id { get; set; }
         public string Title { get; set; } = String.Empty;
         public string? Description { get; set; }

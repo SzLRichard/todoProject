@@ -11,5 +11,10 @@ namespace Application.Services.Interfaces
         public GetTodoItemDTO Create(CreateTodoItemDTO dto);
         public bool Delete(Guid id);
         public bool Update(Guid id, UpdateTodoItemDTO dto);
+        public Task<GetTodoItemDTO?> GetByIdAsync(Guid id);
+        public Task<IEnumerable<GetTodoItemDTO>> GetAllAsync();
+        public Task<GetTodoItemDTO> CreateAsync(CreateTodoItemDTO dto);
+        public Task<bool> DeleteAsync(Guid id);
+        public Task<bool> UpdateAsync(Guid id, UpdateTodoItemDTO dto);
     }
 }

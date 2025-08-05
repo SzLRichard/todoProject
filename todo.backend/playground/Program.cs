@@ -1,5 +1,5 @@
-﻿using todo.core.models;
-using todo.core.models.enums;
+﻿using todo.core.Models;
+using todo.core.Models.Enums;
 
 var todoItem = new TodoItem()
 {
