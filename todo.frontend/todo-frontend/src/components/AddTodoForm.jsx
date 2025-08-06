@@ -14,7 +14,7 @@ export default function AddTodoForm(){
     const handleSubmit = (e) =>{
         e.preventDefault();
 
-        createMut({title,description,deadline,importance,onSuccess:() =>{setTitle("");setDescription(""),setDeadline(""),setImportance(0)}});
+        createMut({title,description,deadline,importance},{onSuccess:() =>{setTitle("");setDescription(""),setDeadline(""),setImportance(0)}});
     }
 
     return(
@@ -28,7 +28,7 @@ export default function AddTodoForm(){
             <input type="date" name="deadline" value={deadline} onChange={(e) => {setDeadline(e.target.value)}} disabled={isCreating} />
             <label htmlFor="importance">Importance</label>
             <select name="importance" id="importance" onChange={(e) => setImportance(e.target.value)} disabled={isCreating}>
-                <option value="0">NotImportant</option>
+                <option value="0">Not Important</option>
                 <option value="1">Slightly Important</option>
                 <option value="2">Important</option>
                 <option value="3">Urgent</option>
